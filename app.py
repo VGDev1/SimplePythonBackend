@@ -16,7 +16,6 @@ def getTestjson():
 
 @app.route('/api/sort', methods=['POST']) 
 def flaskLogin():
-    print(request.json['UnsortedList'])
     if not request.json or not 'UnsortedList' in request.json:
         abort(400) 
     else:
