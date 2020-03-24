@@ -27,15 +27,8 @@ def main():
     for i in range(0, int(size)):
         numbers.append(randint(0, sys.maxsize))
 
-
     file1 = open(output, "w+")
-    file1.write("[")
-    for n in numbers:
-        file1.write(str(n))
-        file1.write(",")
-    file1.write(str(sys.maxsize))
-    file1.write("]")
-
+    file1.write(str(numbers))
     file1.close()
 
 
