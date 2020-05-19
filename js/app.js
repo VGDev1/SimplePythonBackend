@@ -6,7 +6,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.post('/api/sort', (req, res, next) => {
-    const numbers = JSON.parse(req.body.numbers);
+    const numbers = req.body.UnsortedList;
     const sorted = quickSort(numbers);
     res.json(sorted);
 });
