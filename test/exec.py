@@ -26,10 +26,11 @@ makePostRequest('http://localhost:3000/api/sort')
 
 import numpy as np
 from scipy import stats
+import matplotlib.pyplot as plt
 
-times1 = timeit.repeat(setup = SETUP_CODE, stmt = TEST_CODE_PYTHON, repeat = 10000, number = 1)
+times1 = timeit.repeat(setup = SETUP_CODE, stmt = TEST_CODE_PYTHON, repeat = 1000, number = 1)
 #Just to try t-test
-times2 = timeit.repeat(setup = SETUP_CODE, stmt = TEST_CODE_JS, repeat = 10000, number = 1)
+times2 = timeit.repeat(setup = SETUP_CODE, stmt = TEST_CODE_JS, repeat = 1000, number = 1)
 
 meanPython = np.mean(times1)
 medianPython = np.median(times1)
@@ -41,6 +42,11 @@ tTest = stats.ttest_ind(times1, times2)
 print(f"Medelvärde Python: {meanPython} Median Python: {medianPython}")
 print(f"Medelvärde Javascript: {meanJavascript} Median Javascript: {medianJavascript}")
 print(f"T-test: {tTest}")
+
+
+plt.plot(times2)
+plt.ylabel('Javascipt')
+plt.show()
 
 
 
