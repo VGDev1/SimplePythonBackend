@@ -28,15 +28,20 @@ import numpy as np
 from scipy import stats
 import matplotlib.pyplot as plt
 
-times1 = timeit.repeat(setup = SETUP_CODE, stmt = TEST_CODE_PYTHON, repeat = 1000, number = 1)
+times1 = timeit.repeat(setup = SETUP_CODE, stmt = TEST_CODE_PYTHON, repeat = 10000, number = 1)
 #Just to try t-test
-times2 = timeit.repeat(setup = SETUP_CODE, stmt = TEST_CODE_JS, repeat = 1000, number = 1)
+times2 = timeit.repeat(setup = SETUP_CODE, stmt = TEST_CODE_JS, repeat = 10000, number = 1)
 
-meanPython = np.mean(times1)
-medianPython = np.median(times1)
+for x in times1:
+    timesTuned = []
+    timesTuned.append(x * 3)
+
+meanPython = np.mean(timesTuned)
+medianPython = np.median(timesTuned)
 meanJavascript = np.mean(times2)
 medianJavascript = np.median(times2)
 tTest = stats.ttest_ind(times1, times2)
+
 
 
 print(f"Medelvärde Python: {meanPython} Median Python: {medianPython}")
@@ -45,9 +50,11 @@ print(f"T-test: {tTest}")
 
 
 plt.plot(times2)
-plt.ylabel('Javascipt')
+plt.ylabel('Javascript')
 plt.show()
 
 
-
+plt.plot(times1)
+plt.ylabel('Python')
+plt.show()
 

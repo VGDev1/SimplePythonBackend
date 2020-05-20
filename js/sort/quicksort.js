@@ -1,47 +1,25 @@
-const items = [5, 3, 7, 6, 2, 9, 16];
-function swap(items, leftIndex, rightIndex) {
-    var temp = items[leftIndex];
-    items[leftIndex] = items[rightIndex];
-    items[rightIndex] = temp;
-}
-function partition(items, left, right) {
-    var pivot = items[Math.floor((right + left) / 2)], // jävla js
-        i = left,
-        j = right;
-    while (i <= j) {
-        while (items[i] < pivot) {
-            i++;
-        }
-        while (items[j] > pivot) {
-            j--;
-        }
-        if (i <= j) {
-            swap(items, i, j);
-            i++;
-            j--;
-        }
-    }
-    return i;
+function quick_Sort(origArray) {
+	if (origArray.length <= 1) { 
+		return origArray;
+	} else {
+
+		var left = [];
+		var right = [];
+		var newArray = [];
+		var pivot = origArray.pop();
+		var length = origArray.length;
+
+		for (var i = 0; i < length; i++) {
+			if (origArray[i] <= pivot) {
+				left.push(origArray[i]);
+			} else {
+				right.push(origArray[i]);
+			}
+		}
+
+		return newArray.concat(quick_Sort(left), pivot, quick_Sort(right));
+	}
 }
 
-function _quickSort(items, left, right) {
-    let index;
-    if (items.length > 1) {
-        index = partition(items, left, right);
-        if (left < index - 1) {
-            _quickSort(items, left, index - 1);
-        }
-        if (index < right) {
-            _quickSort(items, index, right);
-        }
-    }
-    return items;
-}
 
-function quickSort(items) {
-    return _quickSort(items, 0, items.length - 1);
-}
-
-quickSort(items);
-
-exports.quickSort = quickSort;
+exports.quickSort = quick_Sort;
